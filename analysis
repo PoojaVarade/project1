@@ -1,0 +1,468 @@
+from tkinter import*
+import pandas as pd
+import numpy as np
+from math import*
+import string
+from tabulate import*
+
+#-------------------------------------------------------------------------------------------------------------------- 
+def wdw():
+    
+    global wdw
+    global a,b,c
+    global radio,q,r
+    
+    wdw = Tk()
+    
+    wdw.title("Service Analysis")
+    wdw.geometry('650x530')
+    Label(wdw,text="").pack(side=TOP)
+    Label(wdw, text = "Service Analysis" , font = ("calibri", 11,"bold")).pack(side= TOP)
+    
+    frame=Frame(wdw)
+    frame.pack(side=TOP, fill="both", expand="yes")
+    
+#--------------------------------------------------------------------------------------------------------------------            
+    
+    frame1=LabelFrame(frame, text = " User's Knowledge Level ", font = ("calibri", 11, "bold"))
+    frame1.pack()
+    
+    Busnss=Frame(frame1)
+    Busnss.pack(fill=X ,side=TOP)
+     
+    Label(Busnss, text = "").pack()
+    Label(Busnss, text = "").pack(side=LEFT)
+    Label(Busnss, text = " How many machines user/customer do have?\t" ,justify=LEFT, font = ("calibri", 11)).pack(side = LEFT)
+    a4=DoubleVar()
+    Label(Busnss, text = "").pack(side=RIGHT)
+    a =Entry(Busnss, width = 15, bd=1, bg="white", textvariable=a4)
+    a.pack(side=RIGHT)
+    
+    
+    Exp=Frame(frame1)
+    Exp.pack(fill=X)
+    
+    Label(Exp, text = "").pack()
+    Label(Exp, text = "").pack(side=LEFT)
+    Label(Exp, text = " How much is user’s experience with specific or similar machines?\t" ,justify=LEFT, font = ("calibri", 11)).pack(side=LEFT)
+    b4=DoubleVar()
+    b =Entry(Exp, width = 15, bd=1, bg="white", textvariable=b4)
+    b.pack(side=LEFT)
+    Label(Exp, text = "").pack(side=LEFT)
+    
+    
+    Occ=Frame(frame1)
+    Occ.pack(fill=X ,side=BOTTOM)
+    
+    Label(Occ, text = "").pack()
+    Label(Occ, text = "").pack(side=LEFT)
+    Label(Occ, text = " How many no. of (failure) occurrences user has faced?\t" ,justify=LEFT, font = ("calibri", 11)).pack(side=LEFT)
+    c4=DoubleVar()
+    Label(Occ, text = "").pack(side=RIGHT)
+    c =Entry(Occ, width = 15, bd=1, bg="white", textvariable=c4)
+    c.pack(side=RIGHT)
+    
+#--------------------------------------------------------------------------------------------------------------------            
+    Label(frame, text = "").pack()
+    
+    frame2=LabelFrame(frame, text = " User's Skill Level ", font = ("calibri", 11, "bold"))
+    frame2.pack()    
+    
+    tt=Frame(frame2)
+    tt.pack(fill=X)
+    
+    Label(tt, text = "").pack() 
+    Label(tt, text = "").pack(side=LEFT)
+    Label(tt, text = "What kind of trainings the user has taken?\t" ,justify=LEFT, font = ("calibri", 11)).pack(side=LEFT)
+    radio=IntVar()
+    Label(tt, text = "\t\t\t").pack(side=LEFT)
+    pa = Radiobutton(tt, text="On-Job Training", variable=radio,value = 0, command=cal2).pack(anchor=W)
+    pb = Radiobutton(tt, text="Classroom Training", variable=radio,value = 1, command=cal2).pack(anchor=W)
+    pc = Radiobutton(tt, text="No Training", variable=radio,value = 2, command=cal2).pack(anchor=W)
+    Label(tt, text = "").pack(side=RIGHT)
+    
+    Expo=Frame(frame2)
+    Expo.pack(fill=X) 
+    
+    Label(Expo, text = "").pack(side=LEFT)
+    Label(Expo, text = "How much is user’s experience in the business or with the machines?\t" ,justify=LEFT, font = ("calibri", 11)).pack(side=LEFT)
+    q4=DoubleVar()
+    Label(Expo, text = "").pack(side=RIGHT)
+    q =Entry(Expo, width = 15, bd=1, bg="white", textvariable=q4)
+    q.pack(side=RIGHT)
+    
+    
+    mv=Frame(frame2)
+    mv.pack(fill=X)
+    
+    Label(mv, text = "").pack()
+    Label(mv, text = "").pack(side=LEFT)
+    Label(mv, text = "How many different types of machines the user does have?\t" ,justify=LEFT, font = ("calibri", 11)).pack(side=LEFT)
+    r4=DoubleVar()
+    Label(mv, text = "").pack(side=RIGHT)
+    r =Entry(mv, width = 15, bd=1, bg="white", textvariable=r4)
+    r.pack(side=RIGHT)
+    
+#--------------------------------------------------------------------------------------------------------------------            
+    frame3=Frame(frame)
+    frame3.pack()
+    
+    Button(frame3,text = "Help", width = 10, height = 1, command=Help).pack(padx=5, pady=10, side=LEFT)
+    Button(frame3,text = "Submit", width = 10, height = 1, command=wdw2).pack(padx=5, pady=10, side=LEFT)
+    Button(frame3, text = "Clear", width = 10, height = 1, command = clear).pack(padx=5, pady=10, side=LEFT)
+    Button(frame3,text = "Exit",width = 10, height = 1, command = quit).pack(padx=5, pady=20, side=LEFT)    
+
+#-------------------------------------------------------------------------------------------------------------------- 
+def Help():
+    global Help
+    
+    Help = Toplevel(wdw)
+    
+    Help.title("Help")
+    Help.geometry("890x450")
+    Label(Help,text="" ).pack()
+    Label(Help, text = "Service Analysis" , font = ("calibri", 11,"bold")).pack(side= TOP)
+    
+    frh = Frame(Help)
+    frh.pack(side = TOP, fill = "both", expand = "yes")
+    
+    frh1=LabelFrame(frh,text="User's Knowledge Level", font = ("calibri", 11, "bold"))
+    frh1.pack(side=TOP)
+    
+    Label(frh1,text="" ).pack()
+    
+    frm=Frame(frh1)
+    frm.pack()
+    
+    Label(frm,text="").pack(side=LEFT)
+    
+    frh11=LabelFrame(frm, text="Q1 : User's Business Type")
+    frh11.pack(side=LEFT)
+    
+    Label(frh11,text="").pack()
+    
+    lst11 = [(["1"]), (["2"]), (["3"])]
+    tbl11 = tabulate(lst11, headers=[  "Sr No" ], tablefmt="simple")
+    Label(frh11, text = tbl11, justify=LEFT, padx=3).pack(side=LEFT)
+    
+    lst21 = [(["Large"]), (["Medium"]), ([" Small"])]
+    tbl21 = tabulate(lst21, headers=[  "Business Type" ], tablefmt="simple")
+    Label(frh11, text = tbl21, justify=LEFT, padx=3).pack(side=LEFT)
+    
+    lst31 = [(["50+ machines"]), (["11 to 50 machines"]), (["00 to 10 machines"])]
+    tbl31 = tabulate(lst31, headers=[ "Description" ], tablefmt="simple")
+    Label(frh11, text = tbl31, justify=LEFT, padx=3).pack(side=LEFT)
+    
+    Label(frh11,text="").pack()
+    
+    Label(frm,text="").pack(side=LEFT)
+    
+    frh12=LabelFrame(frm, text="Q2 : User's Experience with machine type")
+    frh12.pack(side=LEFT)
+    
+    Label(frh12,text="").pack()
+    
+    lst21 = [(["1"]), (["2"]), (["3"])]
+    tbl21 = tabulate(lst21, headers=[  "Sr No" ], tablefmt="simple")
+    Label(frh12, text = tbl21, justify=LEFT, padx=3).pack(side=LEFT)
+    
+    lst22 = [(["Long"]), (["Medium"]), (["Short"])]
+    tbl22 = tabulate(lst22, headers=[  "Experience" ], tablefmt="simple")
+    Label(frh12, text = tbl22, justify=LEFT, padx=3).pack(side=LEFT)
+    
+    lst23 = [(["Above 5 years"]), (["1 to 5 years"]), (["Less than 1 year"])]
+    tbl23 = tabulate(lst23, headers=[ "Description" ], tablefmt="simple")
+    Label(frh12, text = tbl23, justify=LEFT, padx=3).pack(side=LEFT)
+    
+    Label(frh12,text="").pack()
+    
+    Label(frm,text="").pack(side=LEFT)
+    
+    frh13=LabelFrame(frm, text="Q3 : Number of Failure occurrences")
+    frh13.pack(side=LEFT)
+   
+    Label(frh13,text="").pack()
+    
+    lst31 = [(["1"]), (["2"]), (["3"])]
+    tbl31 = tabulate(lst31, headers=[  "Sr No" ], tablefmt="simple")
+    Label(frh13, text = tbl31, justify=LEFT, padx=3).pack(side=LEFT)
+    
+    lst32 = [(["High"]), (["Medium"]), (["Few"])]
+    tbl32 = tabulate(lst32, headers=[  "Experience" ], tablefmt="simple")
+    Label(frh13, text = tbl32, justify=LEFT, padx=3).pack(side=LEFT)
+    
+    lst33 = [(["Above 21 calls"]), (["11 to 20 calls"]), (["0 to 10 calls"])]
+    tbl33 = tabulate(lst33, headers=[ "Description" ], tablefmt="simple")
+    Label(frh13, text = tbl33, justify=LEFT, padx=3).pack(side=LEFT)
+    
+    Label(frh13,text="").pack()
+    
+    Label(frm,text="").pack(side=LEFT)
+    Label(frh1,text="").pack(side=LEFT)
+    
+    Label(frh,text="" ).pack()
+    
+    frh2=LabelFrame(frh, text="User's Skill Level", font = ("calibri", 11, "bold"))
+    frh2.pack()
+    
+    Label(frh2,text="").pack()
+    
+    frm0=Frame(frh2)
+    frm0.pack()
+    
+    Label(frm0,text="").pack(side=LEFT)
+    
+    frh21=LabelFrame(frm0, text="Q4 : Type of Training Taken by the customer")
+    frh21.pack(side=LEFT)
+    
+    Label(frh21,text="").pack()
+    
+    lst41 = [(["1"]), (["2"]), (["3"])]
+    tbl41 = tabulate(lst41, headers=[  "Sr No" ], tablefmt="simple")
+    Label(frh21, text = tbl41, justify=LEFT, padx=3).pack(side=LEFT)
+    
+    lst42 = [(["On-Job Training"]), (["Classroom Training"]), (["None"])]
+    tbl42 = tabulate(lst42, headers=[  "Training Taken" ], tablefmt="simple")
+    Label(frh21, text = tbl42, justify=LEFT, padx=3).pack(side=LEFT)
+    
+    lst43 = [(["Hands-on exposure"]), (["Therotical/Technical Training"]), (["No Training taken"])]
+    tbl43 = tabulate(lst43, headers=[ "Description" ], tablefmt="simple")
+    Label(frh21, text = tbl43, justify=LEFT, padx=3).pack(side=LEFT)
+    
+    Label(frh21,text="").pack()
+    
+    Label(frm0,text="").pack(side=LEFT)
+    
+    frh22=LabelFrame(frm0, text="Q5 : Overall User Experience")
+    frh22.pack(side=LEFT)
+    
+    Label(frh22,text="").pack()
+    
+    lst51 = [(["1"]), (["2"]), (["3"])]
+    tbl51 = tabulate(lst51, headers=[  "Sr No" ], tablefmt="simple")
+    Label(frh22, text = tbl51, justify=LEFT, padx=3).pack(side=LEFT)
+    
+    lst52 = [(["Long"]), (["Medium"]), (["Short"])]
+    tbl52 = tabulate(lst52, headers=[  "Overall Experience" ], tablefmt="simple")
+    Label(frh22, text = tbl52, justify=LEFT, padx=3).pack(side=LEFT)
+    
+    lst53 = [(["Above 10 years"]), (["5 to 10 years"]), (["Upto 5 years"])]
+    tbl53 = tabulate(lst53, headers=[ "Description" ], tablefmt="simple")
+    Label(frh22, text = tbl53, justify=LEFT, padx=3).pack(side=LEFT)
+    
+    Label(frh22,text="").pack()
+    
+    Label(frm0,text="").pack(side=LEFT)
+    
+    frh23=LabelFrame(frm0, text="Q6 : Machine Variety")
+    frh23.pack(side=LEFT)
+    
+    Label(frh23,text="").pack()
+    
+    lst61 = [(["1"]), (["2"]), (["3"])]
+    tbl61 = tabulate(lst61, headers=[  "Sr No" ], tablefmt="simple")
+    Label(frh23, text = tbl61, justify=LEFT, padx=3).pack(side=LEFT)
+    
+    lst62 = [(["High"]), (["Medium"]), (["Few"])]
+    tbl62 = tabulate(lst62, headers=[  "Machine Variety" ], tablefmt="simple")
+    Label(frh23, text = tbl62, justify=LEFT, padx=3).pack(side=LEFT)
+    
+    lst63 = [(["6+ machines"]), (["4 to 6 machines"]), (["1 to 3 machines"])]
+    tbl63 = tabulate(lst63, headers=[ "Description" ], tablefmt="simple")
+    Label(frh23, text = tbl63, justify=LEFT, padx=3).pack(side=LEFT)
+    
+    Label(frh23,text="").pack()
+    
+    Label(frm0,text="").pack(side=LEFT)
+    
+    Label(frh2,text="" ).pack()
+    
+#-------------------------------------------------------------------------------------------------------------------- 
+def cal():
+    global df
+    global knwldg
+    global out2, ind1
+    
+    df=pd.read_excel(r'D:\Users\Ashwini\Desktop\project\major\traindata.xlsx', 'knwldg_lvl')
+    
+    a5=a.get()
+    b5=b.get()
+    c5=c.get()
+    
+    a1=float(a5)
+    b1=float(b5)*12
+    c1=float(c5)
+    
+    if (a1, b1, c1>0):
+    
+        if (a1<(11)):
+            bt="small"
+        elif (a1>=12 and a1<50):
+            bt= "medium"
+        else :
+            bt="large"
+#-----------------------------------------------
+    
+        if (b1<11):
+            exp="short"
+        elif (b1>=12 and b1<60):
+            exp= "medium"
+        else :
+            exp="long"
+#-----------------------------------------------
+   
+        if (c1<11):
+            occ="few"
+        elif (c1>=11 and c1<20):
+            occ= "medium"
+        else :
+            occ="high"
+#-----------------------------------------------            
+    i1=0
+    for i1 in df.index:
+        if (df.Business_type.iloc[i1]==bt and df.Experience.iloc[i1]==exp and df.Occurances.iloc[i1]==occ):
+            ind1=i1
+            knwldg= df.Out_ctgry.iloc[ind1]
+        else:
+            i1+=1
+
+#-------------------------------------------------------------------------------------------------------------------- 
+def cal2():
+    global df1
+    global skill
+    global out3, ind2
+    
+    df1=pd.read_excel(r'D:\Users\Ashwini\Desktop\project\major\traindata.xlsx', 'skill_lvl')
+    
+    p5=radio.get()
+    q5=q.get()
+    r5=r.get()
+    
+    p1=float(p5)
+    q1=float(q5)*12
+    r1=float(r5)
+    
+    if (p1==0.0):
+        train="on-job training"
+    elif (p1==1.0):
+        train="class room training"
+    else :
+        train="not taken"
+#-----------------------------------------------        
+    if (q1<=(60)):
+        oexp="short"
+    elif (q1>=(60) and q1<(120)):
+        oexp= "medium"
+    else :
+        oexp="long"
+        
+#-----------------------------------------------
+   
+    if (r1<=2):
+        mchn="few"
+    elif (r1>=3 and r1<5):
+        mchn= "medium"
+    else :
+        mchn="high"
+#-----------------------------------------------      
+    i2=0
+    for i2 in df1.index:
+        if (df1.Training_taken.iloc[i2]==train and df1.overall_experience.iloc[i2]==oexp and df1.machine_variety.iloc[i2]==mchn):
+            ind2=i2
+            skill=df1.Out_ctgry.iloc[ind2]
+        else:
+            i2+=1
+
+#-------------------------------------------------------------------------------------------------------------------- 
+def wdw2():
+    
+    cal() 
+    cal2()
+    global wdw2
+    global ind4
+    global df2
+    
+    wdw2 = Toplevel(wdw)
+    
+    wdw2.title("Failure Information Provided")
+    
+    frame5=Frame(wdw2)
+    frame5.pack()
+    Label(frame5,text="").pack()
+    Label(frame5, text = " Failure Information Provided ", height = "1", font = ("Calibri", 13,"bold")).pack()
+    Label(frame5, text = "").pack()
+    
+#--------------------------------------------------------------------------------------------------------------------
+    result=Frame(frame5)
+    result.pack()
+    
+    Label(result,text="").pack(side=LEFT)
+    
+    ukl=LabelFrame(result)
+    ukl.pack(side=LEFT)
+    
+    lstr = [(["Business Type"]), (["User's Experience"]), (["Failure Occurences"]),([""]), (["User's Knowledge Level"])]
+    tblr = tabulate(lstr, headers=[  "Parameter" ], tablefmt="simple")
+    Label(ukl, text = tblr, justify=LEFT, padx=3, font=("calibri",12)).pack(side=LEFT)
+    
+    lstrs = [([df.Business_type.iloc[ind1]]), ([df.Experience.iloc[ind1]]), ([df.Occurances.iloc[ind1]]),([]),([knwldg])]
+    tblrs = tabulate(lstrs, headers=[  "Result" ], tablefmt="simple")
+    Label(ukl, text = tblrs, justify=LEFT, padx=3, font=("calibri",12)).pack(side=LEFT)
+    
+    Label(result,text="").pack(side=LEFT)
+#--------------------------------------------------------------------------------------------------------------------    
+    usl=LabelFrame(result)
+    usl.pack(side=LEFT)
+    
+    lstr1 = [(["Training Taken"]), (["Overall Experience"]), (["Machine Variety"]),([""]), (["User's Skill Level"])]
+    tblr1 = tabulate(lstr1, headers=[  "Parameter" ], tablefmt="simple")
+    Label(usl, text = tblr1, justify=LEFT, padx=3, font=("calibri",12)).pack(side=LEFT)
+
+    lstrs1 = [([df1.Training_taken.iloc[ind2]]), ([df1.overall_experience.iloc[ind2]]), ([df1.machine_variety.iloc[ind2]]), ([]),([skill])]
+    tblrs1 = tabulate(lstrs1, headers=[  "Result" ], tablefmt="simple")
+    Label(usl, text = tblrs1, justify=LEFT, padx=3, font=("calibri",12)).pack(side=LEFT)
+    
+    Label(result,text="").pack(side=LEFT)
+#--------------------------------------------------------------------------------------------------------------------
+    df2=pd.read_excel(r'D:\Users\Ashwini\Desktop\project\major\traindata.xlsx', 'failure_info')
+    
+    i3=0
+    for i3 in df2.index:
+        if (df2.UKL.iloc[i3]==knwldg and df2.USL.iloc[i3]==skill):
+            ind3=i3
+            fp=df2.Out_ctgry.iloc[ind3]
+        else:
+            i3+=1
+    
+    fip=Frame(frame5)
+    fip.pack(side=BOTTOM)
+    
+    Label(fip, text="").pack()
+    Label(fip, text="").pack()
+    Label(fip, text = " Failure Information Provided : "+ fp, height = "1", font = ("Calibri", 13)).pack()
+    Label(fip, text="").pack()
+#--------------------------------------------------------------------------------------------------------------------
+    
+    w =Button(fip, text = "OK", width = 10, height = 1).pack(padx=5, pady=10, side=LEFT)
+    w =Button(fip, text = "Back", width = 10, height = 1, command = quit2).pack(padx=5, pady=10, side=LEFT)
+    w =Button(fip,text = "Exit",width = 10, height = 1, command = quit2).pack(padx=5, pady=20, side=LEFT)
+    
+#-------------------------------------------------------------------------------------------------------------------- 
+def quit2():
+    wdw2.destroy()
+
+#-------------------------------------------------------------------------------------------------------------------- 
+def clear():
+    a.delete(0,END)
+    b.delete(0,END)
+    c.delete(0,END)
+    q.delete(0,END)
+    r.delete(0,END)
+
+#-------------------------------------------------------------------------------------------------------------------- 
+def quit():
+    wdw.destroy()
+
+#-------------------------------------------------------------------------------------------------------------------- 
+wdw()
+wdw.mainloop()
